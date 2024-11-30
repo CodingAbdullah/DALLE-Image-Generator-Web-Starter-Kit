@@ -1,5 +1,5 @@
 require("dotenv").config({ path: '../.env' });
-const { Configuration, OpenAIApi } = require("openai");
+const { OpenAI } = require("openai");
 const UserPicture = require("../model/UserPicture");
 const User = require('../model/User');
 let S3 = require('aws-sdk/clients/s3');
@@ -103,20 +103,21 @@ exports.createAPicture = (req, res) => {
     const { question, size } = JSON.parse(req.body.body);
 
     // Set up configuration using OpenAI
-    const configuration = new Configuration({
+    const openai = new OpenAI({
         apiKey: process.env.DALLE_KEY
-      });
+    });
     
-    new OpenAIApi(configuration).createImage({
+    openai.images.generate({
+        model: "dall-e-3",
         prompt: question,
         n: 1,
-        size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' ) // small, medium, or large
+        size: size === 'small' ? '256x256' : ( size === 'medium' ? '512x512' : '1024x1024' ) // Small, Medium, or Large
     })
     .then(response => {
         // Once response is sent, send back URL to confirm with user if they want to save it to db or not
         res.status(200).json({
             message: 'Success',
-            url : response.data.data
+            url : response.data[0].url
         });
     })
     .catch(err => {
