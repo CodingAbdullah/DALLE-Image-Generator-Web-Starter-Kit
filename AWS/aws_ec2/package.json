@@ -11,6 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.1306.0",
     "axios": "^1.2.3",
+    "backend": "file:",
     "bcryptjs": "^2.4.3",
     "buffer": "^6.0.3",
     "cors": "^2.8.5",
@@ -21,7 +22,7 @@
     "mongodb": "^4.13.0",
     "mongoose": "^6.8.4",
     "nodemailer": "^6.9.0",
-    "openai": "^3.3.0",
+    "openai": "^4.73.1",
     "request": "^2.88.2",
     "uuid": "^9.0.0"
   }
