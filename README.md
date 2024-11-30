@@ -1,28 +1,22 @@
-# DALL·E 2's Bestie
-#### _A friendly implementation for creating/storing/retrieving AI Generated Images using DALL·E 2_
+# DALL·E Image Generator
+#### _A handy template for a full stack website that supports all CRUD operations for AI image generation using the DALL·E 3 API_
 
-<br>
+<br />
 
-The creators of ChatGPT have released their beta version of the API responsible for the many slick things DALL·E 2 can do. **Create, store and retrieve AI generated images with this site**. 
+The creators of ChatGPT have released their beta version of the API responsible for the many slick things DALL·E 3 can do. **Create, store and retrieve AI generated images with this site**. 
 
 All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
 
-**API key used for the project has now been upgraded to a specific plan with a x usage limit. This was done for security purposes.**
+<b><u><i>Use this open-source template as a guide for modification according to your needs.</b></u></i>
 
-The future is now and the possibilities are endless.
-
-More features will be gradually added to this website but the main parts have already been created and deployed: https://dalle2sbestie.com
-
-<br>
-
+<br />
 
 #### `The Process`
 - Type what you desire as a search
-- Size of the image you desire (small/medium/large, the only options supported in beta version)
-- And then... viola! The miracle happens ;)
-- Don't thank me for it, I'm just a mere developer, AI is yo bosss
+- Size of the image you desire (small/medium/large, the only options supported)
+- DALLE 3 generates the desired image using the prompt and size request
 
-<br>
+<br />
 
 #### `Additional Features`
 
@@ -35,18 +29,17 @@ More features will be gradually added to this website but the main parts have al
 - Forgot password feature enabled (**only for GMAIL accounts**) using **Nodemailer**
 - Verification codes for verifying password resets are provided by **UUID.V4**
 
-<br>
+<br />
 
 ### `Local Environment Architecture`
 <img src="architecture_charts/localdevdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 600px; width:1000px;"/>
-<br>
 
+<br />
 
 ### `AWS Environment Architecture`
 <img src="architecture_charts/awsdiagram.png" alt="AWS DIAGRAM" style="height: 600px; width:1000px;"/>
 
-<br>
-
+<br />
 
 #### `Tech`
 
@@ -63,19 +56,17 @@ The site uses several technologies and tools. **The project is complete, but mor
 - [**AWS**] - AWS services for deploying project to cloud (`AWS Amplify`, `EC2`, `Route 53`, `S3`, etc.)
 - [**Namecheap**] - Domain purchasing
 
-<br>
+<br />
 
 ### `Dockerfile`
 Attached within the server folders are Dockerfiles needed to Dockerize the servers and run as standalone containers. This will essentially, allow users to containerize the applications by generating an image to represent the servers and run them as containers.
 
 <br />
 
-
 ### `Scripts`
 For basic project setup, scripts for each operating system (MAC/WINDOWS) have been provided as bash, powershell scripts respectively.
 
 <br />
-
 
 #### `Javascript Libraries/Dependencies`
 For both frontend/backend development of this project, the following libraries were incorporated. Without which, development of this site would not be possible.
@@ -95,7 +86,7 @@ For both frontend/backend development of this project, the following libraries w
 - **nodemailer**
 - **nip**
 - **npm**
-- **OpenAI - DALL·E 2**
+- **OpenAI - DALL·E 3**
 - **react**
 - **react-router**
 - **redux/toolkit**
@@ -103,7 +94,7 @@ For both frontend/backend development of this project, the following libraries w
 - **uuid**
 - **validator**
 
-<br>
+<br />
 
 #### `License`
 
