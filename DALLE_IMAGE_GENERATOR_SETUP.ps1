@@ -9,9 +9,9 @@ cd "/Users/$NAME/Desktop/"
 
 # Build as you like, change the name of the folder to that which you desire.
 echo 'Setting up local development directory on Desktop...'
-mkdir DALLE2_BESTIE_PROJECT
+mkdir DALLE_IMAGE_GENERATOR
 
-cd DALLE2_BESTIE_PROJECT
+cd DALLE_IMAGE_GENERATOR
 
 # Initialize git on the empty repo
 git init
@@ -25,7 +25,6 @@ cd front-end
 # Make sure you have node installed and the npm registry within your device!
 echo 'Installing react app using create-react-app'
 npx create-react-app .
-
 
 echo 'Successfully installed, installing dependencies...'
 
@@ -57,4 +56,4 @@ npm init
 echo 'Installing npm packages for back-end development'
 npm install aws-sdk axios bcryptjs buffer cors dotenv express jsonwebtoken mongodb mongoose nodemailer openai request uuid
 
-echo 'DALLE2_BESTIE_PROJECT project setup is complete!'
+echo 'DALLE_IMAGE_GENERATOR project setup is complete!'
