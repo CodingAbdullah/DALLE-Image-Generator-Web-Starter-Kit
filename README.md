@@ -1,64 +1,176 @@
-# DALL·E Image Generator
-#### A handy template for a full stack website that supports all CRUD operations for AI image generation using the DALL·E 3 API.
+# DALL·E 3 Image Generator Kit
 
-<br />
+A modern Next.js application for generating AI-powered images using OpenAI's DALL·E 3, with secure user authentication and cloud storage.
 
-OpenAI released their beta version of the image generation API, DALL·E 3. **Create, store and retrieve AI generated images with this site**. 
+Inspired by the previous DALLE 2 website design and **Claude Code**.
+## Features
 
-All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
+- 🎨 **AI Image Generation**: Create stunning images using DALL·E 3
+- 🎭 **Advanced Options**: Quality settings (Standard/HD) and Style controls (Vivid/Natural)
+- 📐 **Multiple Formats**: Square (1024×1024), Portrait (1024×1792), and Landscape (1792×1024)
+- 🔐 **Secure Authentication**: Powered by Clerk
+- 💾 **Cloud Storage**: AWS S3 integration for image storage
+- 🗄️ **Database**: Supabase PostgreSQL with Drizzle ORM
+- 📱 **Responsive Design**: Mobile-first Tailwind CSS design
+- 🎯 **User Gallery**: Save and manage your generated images
+- ⚡ **Modern Stack**: Next.js 15, TypeScript, React 19
 
-<b><u><i>Use this open-source template as a guide for modification according to your needs.</b></u></i>
+## Tech Stack
 
-<br />
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Authentication**: Clerk
+- **Database**: Supabase (PostgreSQL) with Drizzle ORM
+- **AI**: OpenAI DALL·E 3 API
+- **Storage**: AWS S3
+- **Icons**: Lucide React
 
-#### `The Process`
-- Type what you desire as a search
-- Size of the image you desire (small/medium/large, the only options supported)
-- DALLE 3 generates the desired image using the prompt and size request
+## Prerequisites
 
-<br />
+- Node.js 18+ 
+- Supabase account and database
+- AWS S3 bucket
+- Clerk account
+- OpenAI API key (with DALL·E 3 access)
 
-#### `Additional Features`
+## Setup Instructions
 
-- User signin/login/logout supported using **Clerk.js**
-- Security enhanced with salting/hashing passwords using **bcryptjs**
-- Important routes are protected through **Clerk.js**
-- Searching and saving images to database supported
-- Fetching past images supported
-- Validating appropriate emails to be registered to database
-- Forgot password feature enabled using the **Resend** package
-- Verification codes for verifying password resets are provided by **uuid.v4**
+### Quick Setup (Recommended)
 
-<br />
+**Windows:**
+```powershell
+.\setup.ps1
+# Edit .env.local with your API keys
+.\dev.ps1
+```
 
-#### `Tech`
+**Mac/Linux:**
+```bash
+./setup.sh
+# Edit .env.local with your API keys
+./dev.sh
+```
 
-The site uses several technologies and tools. **The project is complete, but more features will be added from time to time to this site**:
+### Manual Setup
 
-- [**AWS**] - AWS services for deploying objects to the cloud (`AWS S3`)
-- [**BcryptJS**] - Resourceful library that helps with salting and hashing passwords prior to database storage
-- [**ClerkJS**] - Authentication framework useful for authenticating users and protecting routes
-- [**Drizzle**] - ORM useful for working with relational databases such as Supabase
-- [**GIT**] - Project version control
-- [**NextJS**] - Full stack framework used for building out the entire web application
-- [**OpenAI**] - API services for imaging provided, validated through the use of keys
-- [**ReactJS**] - UI library for creating front-end pages/components, using the latest features
-- [**Resend**] - Email NPM package used for sending out emails containing verification codes
-- [**Supabase**] - Scalable, relational PostGres SQL database for storing data
-- [**TailwindCSS**] - CSS framework for ready-made components
+#### 1. Clone and Install
 
-<br />
+```bash
+cd next-dalle-image-generator-kit
+npm install
+```
 
-### `Dockerfile`
-Attached within the server folders are Dockerfiles needed to Dockerize the servers and run as standalone containers. This will essentially, allow users to containerize the applications by generating an image to represent the servers and run them as containers.
+### 2. Environment Variables
 
-<br />
+Copy `.env.example` to `.env.local` and fill in your credentials:
 
-### `Scripts`
-For basic project setup, scripts for each operating system (MAC/WINDOWS) have been provided as bash, powershell scripts respectively.
+```bash
+cp .env.example .env.local
+```
 
-<br />
+Required environment variables:
+- `DATABASE_URL`: PostgreSQL connection string
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Clerk publishable key
+- `CLERK_SECRET_KEY`: Clerk secret key
+- `OPENAI_API_KEY`: OpenAI API key
+- `AWS_ACCESS_KEY_ID`: AWS access key
+- `AWS_SECRET_ACCESS_KEY`: AWS secret key
+- `AWS_S3_REGION`: AWS region
+- `AWS_S3_BUCKET_NAME`: S3 bucket name
 
-### `License`
+### 3. Database Setup
 
-MIT
+Generate and push database schema to Supabase:
+
+```bash
+npm run db:generate
+npm run db:push
+```
+
+### 4. AWS S3 Setup
+
+1. Create an S3 bucket in AWS
+2. Set up proper CORS configuration for your bucket
+3. Create an IAM user with S3 read/write permissions
+4. Add the credentials to your environment variables
+
+### 5. Clerk Setup
+
+1. Create a new application in Clerk
+2. Configure your sign-in/sign-up pages
+3. Set up webhooks if needed
+4. Add the keys to your environment variables
+
+### 6. OpenAI Setup
+
+1. Get an API key from OpenAI
+2. Add it to your environment variables
+3. Ensure you have sufficient credits for image generation
+
+### 7. Run the Application
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` to see your application.
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js app router
+│   ├── (auth)/            # Authentication pages
+│   ├── (dashboard)/       # Protected dashboard pages
+│   ├── api/               # API routes
+│   └── about/             # Public pages
+├── components/            # Reusable React components
+├── lib/                   # Utility functions and configurations
+│   ├── db/               # Database schema and connection
+│   ├── aws.ts            # AWS S3 integration
+│   └── openai.ts         # OpenAI integration
+└── middleware.ts         # Clerk middleware for route protection
+```
+
+## API Routes
+
+- `POST /api/generate` - Generate images with DALL·E
+- `GET /api/pictures` - Fetch user's saved pictures
+- `POST /api/pictures/save` - Save generated image to gallery
+- `DELETE /api/pictures/delete` - Delete image from gallery
+
+## Key Components
+
+- **Navbar**: Responsive navigation with authentication state
+- **Generate Page**: AI image generation interface
+- **My Pictures**: Personal image gallery management
+- **Authentication Pages**: Sign-in/sign-up with Clerk
+
+## Database Schema
+
+The application uses a simplified schema with Clerk handling user management:
+- `user_pictures`: Saved generated images with Clerk user ID reference
+
+## Security Features
+
+- Route protection with Clerk middleware
+- Secure file uploads to S3
+- User-specific image access
+- API rate limiting (recommended to add)
+- Environment variable validation
+
+## Deployment
+
+1. **Vercel** (recommended):
+   ```bash
+   npm run build
+   ```
+   Deploy through Vercel dashboard or CLI
+
+2. **Other platforms**:
+   - Ensure all environment variables are set
+   - Database migrations are run
+   - S3 bucket is properly configured
+
+## License
+
+This project is licensed under the MIT License.
