@@ -1,101 +1,176 @@
-# DALL·E Image Generator
-#### _A handy template for a full stack website that supports all CRUD operations for AI image generation using the DALL·E 3 API_
+# DALL·E 3 Image Generator Kit
 
-<br />
+A modern Next.js application for generating AI-powered images using OpenAI's DALL·E 3, with secure user authentication and cloud storage.
 
-The creators of ChatGPT have released their beta version of the API responsible for the many slick things DALL·E 3 can do. **Create, store and retrieve AI generated images with this site**. 
+Inspired by the previous DALLE 2 website design and **Claude Code**.
+## Features
 
-All the source code for creating the site from the ground up, front to back, can be found here. For further documentation, please refer to the relevant section on technologies used.
+- 🎨 **AI Image Generation**: Create stunning images using DALL·E 3
+- 🎭 **Advanced Options**: Quality settings (Standard/HD) and Style controls (Vivid/Natural)
+- 📐 **Multiple Formats**: Square (1024×1024), Portrait (1024×1792), and Landscape (1792×1024)
+- 🔐 **Secure Authentication**: Powered by Clerk
+- 💾 **Cloud Storage**: AWS S3 integration for image storage
+- 🗄️ **Database**: Supabase PostgreSQL with Drizzle ORM
+- 📱 **Responsive Design**: Mobile-first Tailwind CSS design
+- 🎯 **User Gallery**: Save and manage your generated images
+- ⚡ **Modern Stack**: Next.js 15, TypeScript, React 19
 
-<b><u><i>Use this open-source template as a guide for modification according to your needs.</b></u></i>
+## Tech Stack
 
-<br />
+- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Authentication**: Clerk
+- **Database**: Supabase (PostgreSQL) with Drizzle ORM
+- **AI**: OpenAI DALL·E 3 API
+- **Storage**: AWS S3
+- **Icons**: Lucide React
 
-#### `The Process`
-- Type what you desire as a search
-- Size of the image you desire (small/medium/large, the only options supported)
-- DALLE 3 generates the desired image using the prompt and size request
+## Prerequisites
 
-<br />
+- Node.js 18+ 
+- Supabase account and database
+- AWS S3 bucket
+- Clerk account
+- OpenAI API key (with DALL·E 3 access)
 
-#### `Additional Features`
+## Setup Instructions
 
-- User signin/login/logout supported
-- Security enhanced using salting/hashing passwords
-- Important routes are protected through JWT tokens and are verified to check if they are valid
-- Searching and saving images to database supported
-- Fetching past images supported
-- Validating appropriate emails to be registered to database
-- Forgot password feature enabled (**only for GMAIL accounts**) using **Nodemailer**
-- Verification codes for verifying password resets are provided by **UUID.V4**
+### Quick Setup (Recommended)
 
-<br />
+**Windows:**
+```powershell
+.\setup.ps1
+# Edit .env.local with your API keys
+.\dev.ps1
+```
 
-### `Local Environment Architecture`
-<img src="architecture_charts/localdevdiagram.png" alt="LOCAL DEV DIAGRAM" style="height: 600px; width:1000px;"/>
+**Mac/Linux:**
+```bash
+./setup.sh
+# Edit .env.local with your API keys
+./dev.sh
+```
 
-<br />
+### Manual Setup
 
-### `AWS Environment Architecture`
-<img src="architecture_charts/awsdiagram.png" alt="AWS DIAGRAM" style="height: 600px; width:1000px;"/>
+#### 1. Clone and Install
 
-<br />
+```bash
+cd next-dalle-image-generator-kit
+npm install
+```
 
-#### `Tech`
+### 2. Environment Variables
 
-The site uses several technologies and tools. **The project is complete, but more features will be added from time to time to this site**:
+Copy `.env.example` to `.env.local` and fill in your credentials:
 
-- [**OpenAI**] - API services for imaging provided, validated through the use of keys
-- [**NodeJS**] - Back-end development, spinning up the Node server for communication
-- [**ExpressJS**] - A minified framework for backend development, controllers for interacting with model and routes
-- [**ReactJS**] - UI library for creating front-end pages/components, using the latest features
-- [**Redux/Redux Toolkit]** - State container for global state monitoring/maintaining
-- [**Bootstrap**] - CSS framework for ready-made components
-- [**MongoDB Atlas**] - Cloud Based (AWS) Non-Relational Database for storing data
-- [**GIT**] - Project version control
-- [**AWS**] - AWS services for deploying project to cloud (`AWS Amplify`, `EC2`, `Route 53`, `S3`, etc.)
-- [**Namecheap**] - Domain purchasing
+```bash
+cp .env.example .env.local
+```
 
-<br />
+Required environment variables:
+- `DATABASE_URL`: PostgreSQL connection string
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Clerk publishable key
+- `CLERK_SECRET_KEY`: Clerk secret key
+- `OPENAI_API_KEY`: OpenAI API key
+- `AWS_ACCESS_KEY_ID`: AWS access key
+- `AWS_SECRET_ACCESS_KEY`: AWS secret key
+- `AWS_S3_REGION`: AWS region
+- `AWS_S3_BUCKET_NAME`: S3 bucket name
 
-### `Dockerfile`
-Attached within the server folders are Dockerfiles needed to Dockerize the servers and run as standalone containers. This will essentially, allow users to containerize the applications by generating an image to represent the servers and run them as containers.
+### 3. Database Setup
 
-<br />
+Generate and push database schema to Supabase:
 
-### `Scripts`
-For basic project setup, scripts for each operating system (MAC/WINDOWS) have been provided as bash, powershell scripts respectively.
+```bash
+npm run db:generate
+npm run db:push
+```
 
-<br />
+### 4. AWS S3 Setup
 
-#### `Javascript Libraries/Dependencies`
-For both frontend/backend development of this project, the following libraries were incorporated. Without which, development of this site would not be possible.
+1. Create an S3 bucket in AWS
+2. Set up proper CORS configuration for your bucket
+3. Create an IAM user with S3 read/write permissions
+4. Add the credentials to your environment variables
 
-- **aws-sdk**
-- **axios**
-- **bcryptjs**
-- **caddy**
-- **cors**
-- **dotenv**
-- **express**
-- **express-fileupload**
-- **jsonwebtoken**
-- **localstorage**
-- **mongodb**
-- **mongoose**
-- **nodemailer**
-- **nip**
-- **npm**
-- **OpenAI - DALL·E 3**
-- **react**
-- **react-router**
-- **redux/toolkit**
-- **request**
-- **uuid**
-- **validator**
+### 5. Clerk Setup
 
-<br />
+1. Create a new application in Clerk
+2. Configure your sign-in/sign-up pages
+3. Set up webhooks if needed
+4. Add the keys to your environment variables
 
-#### `License`
+### 6. OpenAI Setup
 
-MIT
+1. Get an API key from OpenAI
+2. Add it to your environment variables
+3. Ensure you have sufficient credits for image generation
+
+### 7. Run the Application
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000` to see your application.
+
+## Project Structure
+
+```
+src/
+├── app/                    # Next.js app router
+│   ├── (auth)/            # Authentication pages
+│   ├── (dashboard)/       # Protected dashboard pages
+│   ├── api/               # API routes
+│   └── about/             # Public pages
+├── components/            # Reusable React components
+├── lib/                   # Utility functions and configurations
+│   ├── db/               # Database schema and connection
+│   ├── aws.ts            # AWS S3 integration
+│   └── openai.ts         # OpenAI integration
+└── middleware.ts         # Clerk middleware for route protection
+```
+
+## API Routes
+
+- `POST /api/generate` - Generate images with DALL·E
+- `GET /api/pictures` - Fetch user's saved pictures
+- `POST /api/pictures/save` - Save generated image to gallery
+- `DELETE /api/pictures/delete` - Delete image from gallery
+
+## Key Components
+
+- **Navbar**: Responsive navigation with authentication state
+- **Generate Page**: AI image generation interface
+- **My Pictures**: Personal image gallery management
+- **Authentication Pages**: Sign-in/sign-up with Clerk
+
+## Database Schema
+
+The application uses a simplified schema with Clerk handling user management:
+- `user_pictures`: Saved generated images with Clerk user ID reference
+
+## Security Features
+
+- Route protection with Clerk middleware
+- Secure file uploads to S3
+- User-specific image access
+- API rate limiting (recommended to add)
+- Environment variable validation
+
+## Deployment
+
+1. **Vercel** (recommended):
+   ```bash
+   npm run build
+   ```
+   Deploy through Vercel dashboard or CLI
+
+2. **Other platforms**:
+   - Ensure all environment variables are set
+   - Database migrations are run
+   - S3 bucket is properly configured
+
+## License
+
+This project is licensed under the MIT License.

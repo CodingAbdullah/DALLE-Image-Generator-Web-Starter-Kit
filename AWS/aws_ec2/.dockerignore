@@ -1,4 +1,0 @@
-# Files/Directories that will not be needed for creating the back-end image
-Dockerfile
-.git
-node_modules
